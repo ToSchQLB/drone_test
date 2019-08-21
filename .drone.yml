@@ -10,8 +10,6 @@ steps:
 
   - name: test
     image: php:7-apache
-    ports:
-      - 8080
     commands:
       - apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
       - docker-php-ext-install pdo_mysql
@@ -25,8 +23,6 @@ steps:
 services:
   - name: mysql_db
     image: mysql:5
-    ports:
-      - 3306
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       MYSQL_DATABASE: 'test_db'
