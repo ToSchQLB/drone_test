@@ -30,4 +30,4 @@ services:
 
   - name: selenium
     image: selenium/standalone-chrome
-    ports:
+#    ports:
