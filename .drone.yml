@@ -9,6 +9,8 @@ steps:
 
   - name: test
     image: php:7-apache
+    env:
+      APACHE_DOCUMENT_ROOT: '/drone/src/web'
     ports:
       - 80
       - 8080
