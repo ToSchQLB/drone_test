@@ -20,17 +20,19 @@ steps:
 #      - 8080:8080
     commands:
 #      - sleep 90 
-      - apt-get update && apt-get install -y wget #libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
+      - apt-get update -y && apt-get install -y libpng-dev
+      - docker-php-ext-install pdo pdo_mysql gd
+#      - apt-get update && apt-get install -y wget #libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
 #      - docker-php-ext-install pdo_mysql
 #      - php yii serve 2>&1 &
       - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/db.php
       - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/test_db.php
-#      - php yii migrate --interactive=0
-      - wget -v http://testserver/index.php && ls -l
-      - wget -v http://testserver/web/index.php && ls -l
-      - wget -v http://testserver:8080/index.php && ls -l
-      - ls -lisah
-      - cat index.php
+      - php yii migrate --interactive=0
+#      - wget -v http://testserver/index.php && ls -l
+#      - wget -v http://testserver/web/index.php && ls -l
+#      - wget -v http://testserver:8080/index.php && ls -l
+#      - ls -lisah
+#      - cat index.php
       - vendor/bin/codecept run
 
 services:
@@ -48,7 +50,7 @@ services:
 
   
   - name: testserver
-    image: php:7-apache
+    image: php:7-fpm
     ports:
       - 80
       - 8080
@@ -56,13 +58,6 @@ services:
     - name: webdata
       path: /drone/src
     commands:
-      - ls -lisah
-#      - apt-get update && apt-get install -y wget zlib
-#      - wget https://getcomposer.org/composer.phar
-#      - docker-php-ext-install pdo pdo_mysql
+      - apt-get update -y && apt-get install -y libpng-dev
+      - docker-php-ext-install pdo pdo_mysql gd
       - php -S testserver:8080 -t ./web
-#      - php composer.phar install --dev
-#      - php yii serve
-#      - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/db.php
-#      - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/test_db.php
-
