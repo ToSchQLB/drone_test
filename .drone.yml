@@ -11,7 +11,7 @@ steps:
   - name: test
     image: php:7-apache
     commands:
-      - sleep 15
+      - sleep 20
       - apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
       - docker-php-ext-install pdo_mysql
       - php yii migrate --interactive=0
@@ -30,6 +30,8 @@ services:
 
   - name: selenium
     image: selenium/standalone-chrome
+    depends_on:
+      - testwebserver
     ports:
       - 4444
 
@@ -39,7 +41,7 @@ services:
     ports:
       - 8080
     commands:
-      - sleep 60
+      - sleep 70
       - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/db.php
       - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/test_db.php
       - php yii serve
