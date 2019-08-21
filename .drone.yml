@@ -46,7 +46,7 @@ services:
 
   
   - name: testserver
-    image: php:7-fpm
+    image: php:7-apache
     ports:
       - 8080
     volumes:
