@@ -2,10 +2,10 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://test:8080/
+            url: http://test:80/
             host: selenium
             browser: firefox
         - Yii2:
             part: orm
-            entryScript: index-test.php
+            entryScript: index.php
             cleanup: false
