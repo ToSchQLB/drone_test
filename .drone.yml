@@ -7,12 +7,14 @@ steps:
     commands:
       - composer install --dev
 
+
   - name: test
     image: php:7-apache
     commands:
       - apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
       - docker-php-ext-install pdo_mysql
       - php yii migrate --interactive=0
+      - php yii serve > /dev/null 2>&1 &
       - vendor/bin/codecept run
 
 services:
@@ -28,7 +30,5 @@ services:
 
   - name: selenium
     image: selenium/standalone-chrome
-    depends_on:
-      - testwebserver
     ports:
       - 4444
