@@ -58,6 +58,6 @@ services:
     - name: webdata
       path: /drone/src
     commands:
-      - apt-get update -y && apt-get install -y libpng-dev libfreetype6
+      - apt-get update -y && apt-get install -y libpng-dev libmagickwand-dev && pecl install imagick && docker-php-ext-enable imagick
       - docker-php-ext-install pdo pdo_mysql gd
       - php -S testserver:8080 -t ./web
