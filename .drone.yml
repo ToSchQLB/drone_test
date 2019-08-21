@@ -5,18 +5,17 @@ steps:
   - name: install
     image: composer
     commands:
-      - composer install
+      - composer install --dev
 
   - name: test
     image: php:7-apache
     commands:
       - docker-php-ext-install pdo_mysql
       - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/db.php
-      - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/db_test.php
-      - php yii migrate --migrationPath=@yii/rbac/migrations --interactive=0
-      - php yii migrate --migrationNamespaces=Da\User\Migration --interactive=0
+      - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/test_db.php
       - php yii migrate --interactive=0
-      - vendor/bin/codecept run unit
+      - php yii serve
+      - vendor/bin/codecept run
 
 services:
   - name: mysql_db
