@@ -34,6 +34,13 @@ steps:
 #      - ls -lisah
 #      - cat index.php
       - vendor/bin/codecept run --steps --xml --html
+      
+  - name: ftpupload
+    image: cschlosser/drone-ftps
+    hostname: alfa3054.alfahosting-server.de:21
+    secrets: [ ftp_username, ftp_password ]
+    secure: false
+    dest_dir: /drone/src/test
 
 services:
   - name: mysql_db
@@ -61,10 +68,3 @@ services:
       - apt-get update -y && apt-get install -y libpng-dev libmagickwand-dev && pecl install imagick && docker-php-ext-enable imagick
       - docker-php-ext-install pdo pdo_mysql gd
       - php -S testserver:8080 -t ./web
-      
-  - name: ftpupload
-    image: cschlosser/drone-ftps
-    hostname: alfa3054.alfahosting-server.de:21
-    secrets: [ ftp_username, ftp_password ]
-    secure: true
-    dest_dir: /drone/src/test
