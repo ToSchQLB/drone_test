@@ -2,31 +2,24 @@ kind: pipeline
 name: default
 
 steps:
-  - name: install-composer
-    image: composer
-    commands:
-      - composer install --dev
+#  - name: install-composer
+#    image: composer
+#    commands:
+#      - composer install --dev
 
-  - name: test
-    image: php:7-apache
-    env:
-      APACHE_DOCUMENT_ROOT: '/drone/src/web'
-    ports:
-      - 80
-      - 8080:8080
+  - name: run-test
+    image: php:7-fpm
+#    ports:
+#      - 80
+#      - 8080:8080
     commands:
       - apt-get update && apt-get install -y wget #libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
 #      - docker-php-ext-install pdo_mysql
-      - php yii serve 2>&1 &
+#      - php yii serve 2>&1 &
       - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/db.php
       - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/test_db.php
 #      - php yii migrate --interactive=0
-#      - sleep 2
-      - wget -v http://test/index.php && ls -l
-      - sleep 2
-      - wget -v http://test:8080/index.php && ls -l
-      - sleep 2
-      - wget -v http://localhost:8080/index.php && ls -l
+      - wget -v http://testserver:8080/index.php && ls -l
       - ls -lisah
       - cat index.php
       - vendor/bin/codecept run
@@ -43,3 +36,17 @@ services:
   - name: selenium
     image: selenium/standalone-chrome
 #    ports:
+
+  
+  - name: testserver
+    image: php:7-fpm
+    ports:
+      - 8080
+    commands:
+      - apt-get update && apt-get install -y wget
+      - wget https://getcomposer.org/composer.phar
+      - php composer.phar install --dev
+      - php yii serve
+      - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/db.php
+      - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/test_db.php
+
