@@ -19,6 +19,18 @@ steps:
       - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/test_db.php
       - php yii serve
 
+  - name: selenium
+    image: selenium/hub
+    detach: true
+
+  - name: chrome
+    image: selenium/node-chrome
+    detach: true
+    environment:
+      HUB_PORT_4444_TCP_ADDR: selenium
+      HUB_PORT_4444_TCP_PORT: 4444
+      DISPLAY: ":99.0"
+
   - name: test
     image: php:7-apache
     commands:
@@ -38,17 +50,3 @@ services:
       MYSQL_DATABASE: 'test_db'
       MYSQL_USER: 'test_user'
       MYSQL_PASSWORD: 'test_pass'
-
-  - name: selenium
-    ports:
-      - 4444
-    image: selenium/hub
-
-  - name: chrome
-    image: selenium/node-chrome
-    ports:
-      - 5555
-    environment:
-      HUB_PORT_4444_TCP_ADDR: selenium
-      HUB_PORT_4444_TCP_PORT: 4444
-      DISPLAY: ":99.0"
