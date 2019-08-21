@@ -50,6 +50,7 @@ services:
   - name: testserver
     image: php:7-apache
     ports:
+      - 80
       - 8080
     volumes:
     - name: webdata
