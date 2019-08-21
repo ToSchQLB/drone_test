@@ -20,7 +20,7 @@ steps:
 #      - 8080:8080
     commands:
 #      - sleep 90 
-      - apt-get update -y && apt-get install -y libpng-dev
+      - apt-get update -y && apt-get install -y libpng-dev libfreetype6
       - docker-php-ext-install pdo pdo_mysql gd
 #      - apt-get update && apt-get install -y wget #libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
 #      - docker-php-ext-install pdo_mysql
@@ -58,6 +58,6 @@ services:
     - name: webdata
       path: /drone/src
     commands:
-      - apt-get update -y && apt-get install -y libpng-dev
+      - apt-get update -y && apt-get install -y libpng-dev libfreetype6
       - docker-php-ext-install pdo pdo_mysql gd
       - php -S testserver:8080 -t ./web
