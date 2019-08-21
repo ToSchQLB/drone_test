@@ -13,7 +13,7 @@ steps:
       APACHE_DOCUMENT_ROOT: '/drone/src/web'
     ports:
       - 80
-      - 8080
+      - 8080:8080
     commands:
       - apt-get update && apt-get install -y wget #libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
 #      - docker-php-ext-install pdo_mysql
@@ -26,7 +26,7 @@ steps:
       - sleep 2
       - wget -v http://test:8080/index.php && ls -l
       - sleep 2
-      - wget -v http://localhost/index.php && ls -l
+      - wget -v http://localhost:8080/index.php && ls -l
       - ls -lisah
       - cat index.php
       - vendor/bin/codecept run
