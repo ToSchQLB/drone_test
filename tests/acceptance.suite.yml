@@ -2,7 +2,7 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://testwebserver:8080/
+            url: http://localhost:8080/
             host: chrome
             port: 5555
             browser: chrome
