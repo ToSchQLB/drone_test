@@ -4,11 +4,17 @@ name: default
 steps:
   - name: install-composer
     image: composer
+    volumes:
+    - name: webdata
+      path: /drone/src
     commands:
       - composer install --dev
 
   - name: run-test
     image: php:7-fpm
+    volumes:
+    - name: webdata
+      path: /drone/src
 #    ports:
 #      - 80
 #      - 8080:8080
@@ -43,11 +49,14 @@ services:
     image: php:7-fpm
     ports:
       - 8080
+    volumes:
+    - name: webdata
+      path: /drone/src
     commands:
 #      - ls -lisah
 #      - apt-get update && apt-get install -y wget zlib
 #      - wget https://getcomposer.org/composer.phar
-      - docker-php-ext-install gd pdo pdo_mysql
+      - docker-php-ext-install pdo pdo_mysql
       - php -S -t ".\web\"
 #      - php composer.phar install --dev
 #      - php yii serve
