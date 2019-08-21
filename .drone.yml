@@ -61,3 +61,11 @@ services:
       - apt-get update -y && apt-get install -y libpng-dev libmagickwand-dev && pecl install imagick && docker-php-ext-enable imagick
       - docker-php-ext-install pdo pdo_mysql gd
       - php -S testserver:8080 -t ./web
+---   
+kind: pipline
+name: notification
+
+steps:
+  -name: codedev
+  image: robertstettner/drone-codecov
+  token: 912384cc-e168-4c45-bb7b-0bd3c6cff21f
