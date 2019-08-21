@@ -22,6 +22,8 @@ steps:
       - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/test_db.php
 #      - php yii migrate --interactive=0
 #      - sleep 2
+      - wget http://localhost/index.php
+      - cat index.php
       - vendor/bin/codecept run
 
 services:
