@@ -2,10 +2,10 @@ kind: pipeline
 name: default
 
 steps:
-#  - name: install-composer
-#    image: composer
-#    commands:
-#      - composer install --dev
+  - name: install-composer
+    image: composer
+    commands:
+      - composer install --dev
 
   - name: run-test
     image: php:7-fpm
@@ -13,6 +13,7 @@ steps:
 #      - 80
 #      - 8080:8080
     commands:
+      - sleep 90 
       - apt-get update && apt-get install -y wget #libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
 #      - docker-php-ext-install pdo_mysql
 #      - php yii serve 2>&1 &
