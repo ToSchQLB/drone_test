@@ -3,7 +3,7 @@ modules:
     enabled:
         - WebDriver:
             url: http://test:8080/
-            host: http://selenium:4444/wd/hub
+            host: selenium
             browser: chrome
         - Yii2:
             part: orm
