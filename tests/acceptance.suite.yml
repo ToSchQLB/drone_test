@@ -4,7 +4,7 @@ modules:
         - WebDriver:
             url: http://test:8080/
             host: selenium
-            browser: chrome
+            browser: firefox
         - Yii2:
             part: orm
             entryScript: index-test.php

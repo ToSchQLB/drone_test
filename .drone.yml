@@ -10,7 +10,7 @@ steps:
 
   - name: selenium
     detach: true
-    image: selenium/standalone-chrome
+    image: selenium/standalone-firefox
 
   - name: test
     image: php:7-apache
