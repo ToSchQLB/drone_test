@@ -40,9 +40,9 @@ steps:
     settings:
       token: 912384cc-e168-4c45-bb7b-0bd3c6cff21f
       files:
-      - *.xml
+      - '*.xml'
       paths:
-      - tests/output/coverage
+      - tests/_output
 
 services:
   - name: mysql_db
