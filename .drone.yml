@@ -35,12 +35,14 @@ steps:
 #      - cat index.php
       - vendor/bin/codecept run --steps --xml --html
       
-  - name: ftpupload
-    image: cschlosser/drone-ftps
-    hostname: alfa3054.alfahosting-server.de:21
-    secrets: [ ftp_username, ftp_password ]
-    secure: true
-    dest_dir: /drone/src/test
+  - name: coverage
+    image: plugins/codecov
+    settings:
+      token: 912384cc-e168-4c45-bb7b-0bd3c6cff21f
+      files:
+      - *.xml
+      paths:
+      - tests/output/coverage
 
 services:
   - name: mysql_db
