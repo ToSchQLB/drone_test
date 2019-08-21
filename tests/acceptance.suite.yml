@@ -2,7 +2,7 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://test/
+            url: http://testserver:8080/
             host: selenium
             browser: chrome
         - Yii2:
