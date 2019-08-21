@@ -40,11 +40,12 @@ services:
 
   
   - name: testserver
-    image: php:7-fpm
+    image: php:7-apache
     ports:
       - 8080
     commands:
-      - apt-get update && apt-get install -y wget
+      - ls -lisah
+      - apt-get update && apt-get install -y wget zlib
       - wget https://getcomposer.org/composer.phar
       - docker-php-ext-install mbstring zip gd pdo pdo_mysql
       - php composer.phar install --dev
