@@ -7,15 +7,8 @@ steps:
     commands:
       - composer install --dev
 
-
-  - name: selenium
-    detach: true
-    image: selenium/standalone-chrome
-
   - name: test
     image: php:7-apache
-    environment:
-      APACHE_DOCUMENT_ROOT: 'web'
     commands:
 #      - apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
 #      - docker-php-ext-install pdo_mysql
@@ -34,3 +27,7 @@ services:
       MYSQL_DATABASE: 'test_db'
       MYSQL_USER: 'test_user'
       MYSQL_PASSWORD: 'test_pass'
+
+  - name: selenium
+    image: selenium/standalone-chrome
+    ports:
