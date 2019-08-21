@@ -55,11 +55,11 @@ services:
     - name: webdata
       path: /drone/src
     commands:
-#      - ls -lisah
+      - ls -lisah
 #      - apt-get update && apt-get install -y wget zlib
 #      - wget https://getcomposer.org/composer.phar
 #      - docker-php-ext-install pdo pdo_mysql
-      - php -S localhost:8080 -t ./web
+      - php -S testserver:8080 -t ./web
 #      - php composer.phar install --dev
 #      - php yii serve
 #      - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/db.php
