@@ -66,6 +66,6 @@ kind: pipline
 name: notification
 
 steps:
-  -name: codedev
-  image: robertstettner/drone-codecov
-  token: 912384cc-e168-4c45-bb7b-0bd3c6cff21f
+  - name: codedev
+    image: robertstettner/drone-codecov
+    token: 912384cc-e168-4c45-bb7b-0bd3c6cff21f
