@@ -24,6 +24,7 @@ steps:
 #      - sleep 2
       - wget -q http://test/index.php && ls -l
       - sleep 5
+      - ls -lisah
       - cat index.php
       - vendor/bin/codecept run
 
