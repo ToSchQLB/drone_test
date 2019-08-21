@@ -37,7 +37,6 @@ services:
 
   - name: testwebserver
     image: php:7-apache
-    detach: true
     ports:
       - 8080
     commands:
