@@ -7,23 +7,25 @@ steps:
     commands:
       - composer install --dev
 
-  - name: test-webserver
+  - name: testwebserver
     image: php:7-apache
     detach: true
     ports:
       - 8080
     commands:
+      - apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
       - docker-php-ext-install pdo_mysql
       - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/db.php
       - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/test_db.php
-      - php yii migrate --interactive=0
       - php yii serve
 
   - name: test
     image: php:7-apache
     commands:
       - sleep 5
+      - apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
       - docker-php-ext-install pdo_mysql
+      - php yii migrate --interactive=0
       - vendor/bin/codecept run
 
 services:
@@ -38,10 +40,14 @@ services:
       MYSQL_PASSWORD: 'test_pass'
 
   - name: selenium
+    ports:
+      - 4444
     image: selenium/hub
 
   - name: chrome
     image: selenium/node-chrome
+    ports:
+      - 5555
     environment:
       HUB_PORT_4444_TCP_ADDR: selenium
       HUB_PORT_4444_TCP_PORT: 4444
