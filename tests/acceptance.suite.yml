@@ -2,7 +2,7 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://testwebserver:8080/
+            url: http://loaclhost:8080/
             host: selenium
             port: 4444
             browser: chrome
