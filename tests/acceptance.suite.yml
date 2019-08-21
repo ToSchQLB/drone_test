@@ -2,9 +2,9 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://localhost:8080/
-            host: chrome
-            port: 5555
+            url: http://testwebserver:8080/
+            host: selenium
+            port: 4444
             browser: chrome
         - Yii2:
             part: orm
