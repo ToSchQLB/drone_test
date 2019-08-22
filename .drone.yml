@@ -12,6 +12,7 @@ steps:
 
   - name: run-test
     image: php:7-fpm
+    allow_failure: true
     volumes:
     - name: webdata
       path: /drone/src
