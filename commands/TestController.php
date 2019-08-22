@@ -31,7 +31,7 @@ class TestController extends Controller
             if(!is_dir($path)) {
                 $results[] = $path;
             } else if($value != "." && $value != "..") {
-                getDirContents($path, $results);
+                $this->getDirContents($path, $results);
                 $results[] = $path;
             }
         }
