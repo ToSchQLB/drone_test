@@ -37,7 +37,7 @@ steps:
       - vendor/bin/codecept run --steps --xml --html
       - php yii test/test
 
-  - name: run-test
+  - name: test-test
     image: php:7-fpm
     failure: ignore
     commands:
