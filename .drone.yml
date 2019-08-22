@@ -46,6 +46,7 @@ steps:
     commands:
       - php yii test/test
 
+
   - name: ftpupload
     image: cschlosser/drone-ftps
     hostname: 'alfa3054.alfahosting-server.de:21'
