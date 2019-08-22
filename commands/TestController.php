@@ -10,7 +10,7 @@ class TestController extends Controller
 {
     public $api = '';
     public function actionTest(){
-        var_dump($this->getDirContents('.' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'output'));
+        var_dump($this->getDirContents(DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'drone' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'output'));
     }
     
     public function actionUpload(){
