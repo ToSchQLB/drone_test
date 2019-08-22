@@ -26,7 +26,6 @@ steps:
       - vendor/bin/codecept run --xml --html --json --phpunit-xml --report
       - php yii test/test
 
-
   - name: test-test
     image: php:7-fpm
     volumes:
@@ -47,7 +46,6 @@ steps:
       PLUGIN_HOSTNAME: 'alfa3054.alfahosting-server.de:21'
       PLUGIN_SRC_DIR: '/tests/_output/'
 
-    
 services:
   - name: mysql_db
     image: mysql:5
