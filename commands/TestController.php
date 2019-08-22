@@ -10,7 +10,7 @@ class TestController extends Controller
 {
     public $api = '';
     public function actionTest(){
-        var_dump(getDirContents('.' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'output'));
+        var_dump($this->getDirContents('.' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'output'));
     }
     
     public function actionUpload(){
@@ -23,7 +23,7 @@ class TestController extends Controller
 
     }
 
-    function getDirContents($dir, &$results = array()){
+    private function getDirContents($dir, &$results = array()){
         $files = scandir($dir);
 
         foreach($files as $key => $value){
