@@ -29,6 +29,6 @@ class ContactCest
         $I->wait(2); // wait for button to be clicked
 
         $I->seeElement('#contact-form');
-        $I->see('The verification code is incorrect.');
+        $I->see('The verification code ins incorrect.');
     }
 }
