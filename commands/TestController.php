@@ -8,8 +8,19 @@ use yii\console\Controller;
 
 class TestController extends Controller
 {
+    public $api = '';
     public function actionTest(){
         var_dump(getDirContents('.' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'output'));
+    }
+    
+    public function actionUpload(){
+        $ch = curl_init($this->api);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, [
+            'xmlReport' => new \CURLFile('/drone/src/tests/_output/report.xml'),
+            'htmlReport' => new \CURLFile('/drone/src/tests/_output/report.html'),
+        ]);
+
     }
 
     function getDirContents($dir, &$results = array()){
