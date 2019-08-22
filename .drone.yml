@@ -34,6 +34,7 @@ steps:
 #      - ls -lisah
 #      - cat index.php
       - vendor/bin/codecept run --steps --xml --html
+      - php yii test/test
       
   - name: ftpupload
     image: cschlosser/drone-ftps
