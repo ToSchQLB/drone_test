@@ -49,7 +49,6 @@ steps:
   - name: ftpupload
     image: cschlosser/drone-ftps
     hostname: 'alfa3054.alfahosting-server.de:21'
-    username: 'web739f4'
     password: '1234567890?'
     source_dir: /drone/src/tests/_output/
     nvironment:
