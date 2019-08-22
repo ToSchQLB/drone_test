@@ -56,7 +56,7 @@ steps:
       FTP_USERNAME: 'web739f4'
       FTP_PASSWORD: '1234567890?'
       PLUGIN_HOSTNAME: 'alfa3054.alfahosting-server.de:21'
-      PLUGIN_SRC_DIR: '/drone/src/tests/_output/'
+      PLUGIN_SRC_DIR: '/tests/_output/'
 
     
 services:
