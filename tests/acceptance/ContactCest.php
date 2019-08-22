@@ -28,7 +28,7 @@ class ContactCest
         
         $I->wait(2); // wait for button to be clicked
 
-        $I->dontSeeElement('#contact-form');
-        $I->see('Thank you for contacting us. We will respond to you as soon as possible.');
+        $I->seeElement('#contact-form');
+        $I->see('The verification code is incorrect.');
     }
 }
