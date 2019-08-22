@@ -28,7 +28,6 @@ class TestController extends Controller
 
         foreach($files as $key => $value){
             $path = realpath($dir.DIRECTORY_SEPARATOR.$value);
-
             if(!is_dir($path)) {
                 $results[] = $path;
             } else if($value != "." && $value != "..") {
