@@ -29,16 +29,7 @@ steps:
     commands:
       - vendor/bin/codecept run --xml --html --json
 
-  - name: test-test
-    image: php:7-fpm
-    volumes:
-      - name: webdata
-        path: /drone/src
-    failure: ignore
-    commands:
-      - php yii test/test
-
-  - name: ftpupload
+  - name: upload-result
     image: cschlosser/drone-ftps
     hostname: 'alfa3054.alfahosting-server.de:21'
     password: '1234567890?'
@@ -48,6 +39,15 @@ steps:
       FTP_PASSWORD: '1234567890?'
       PLUGIN_HOSTNAME: 'alfa3054.alfahosting-server.de:21'
       PLUGIN_SRC_DIR: '/tests/_output/'
+
+  - name: process-results
+    image: php:7-fpm
+    volumes:
+      - name: webdata
+        path: /drone/src
+    failure: ignore
+    commands:
+      - php yii test/test
 
 services:
   - name: mysql_db
