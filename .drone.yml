@@ -10,6 +10,15 @@ steps:
     commands:
       - composer install --dev
 
+  - name: configure-app
+    image: toschqlb/php-test-server
+    volumes:
+      - name: webdata
+        path: /drone/src
+    commands:
+      - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/db.php
+      - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/test_db.php
+
   - name: yii-migrate
     image: toschqlb/php-test-server
     failure: ignore
@@ -17,8 +26,6 @@ steps:
       - name: webdata
         path: /drone/src
     commands:
-      - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/db.php
-      - echo "<?php return ['class' => 'yii\db\Connection','dsn' => 'mysql:host=mysql_db;dbname=test_db','username' => 'test_user','password' => 'test_pass','charset' => 'utf8']; ?>" > config/test_db.php
       - php yii migrate --interactive=0
 
   - name: run-test
@@ -31,13 +38,13 @@ steps:
 
   - name: upload-result
     image: cschlosser/drone-ftps
-    hostname: 'alfa3054.alfahosting-server.de:21'
-    password: '1234567890?'
-    source_dir: /drone/src/tests/_output/
     environment:
-      FTP_USERNAME: 'web739f4'
-      FTP_PASSWORD: '1234567890?'
-      PLUGIN_HOSTNAME: 'alfa3054.alfahosting-server.de:21'
+      FTP_USERNAME:
+        from_secret: ftp_username
+      FTP_PASSWORD:
+        from_secret: ftp_passwort
+      PLUGIN_HOSTNAME:
+        from_secret: ftp_host
       PLUGIN_SRC_DIR: '/tests/_output/'
     when:
       status:
