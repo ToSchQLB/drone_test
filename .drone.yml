@@ -28,19 +28,19 @@ steps:
     commands:
       - php yii migrate --interactive=0
 
-#  - name: run-test
-#    image: toschqlb/php-test-server
-#    volumes:
-#    - name: webdata
-#      path: /drone/src
-#    commands:
-#      - vendor/bin/codecept run --xml --html --json
-
-  - name: ubuntu-test
-    image: ubuntu:bionic
+  - name: run-test
+    image: toschqlb/php-test-server
+    volumes:
+    - name: webdata
+      path: /drone/src
     commands:
-      - apt-get -y update && apt-get install -y sshpass
-      - echo "cd /var/www/html && vendor/bin/codecept run --xml --html --json" | sshpass -p sshp ssh -T sshuser@testserver
+      - vendor/bin/codecept run --xml --html --json
+
+#  - name: ubuntu-test
+#    image: ubuntu:bionic
+#    commands:
+#      - apt-get -y update && apt-get install -y sshpass
+#      - sshpass -p sshp ssh -T sshuser@testserver
 
   - name: upload-result
     image: cschlosser/drone-ftps
