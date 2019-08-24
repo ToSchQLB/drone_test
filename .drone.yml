@@ -91,7 +91,7 @@ services:
     - name: webdata
       path: /drone/src
     commands:
-      - php -S testserver:8080 -t ./web
       - apt-get install -y openssh-server
       - service ssh start
       - useradd -p $(openssl passwd -1 sshpass) sshuser
+      - php -S testserver:8080 -t ./web
