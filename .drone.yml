@@ -40,7 +40,7 @@ steps:
     image: ubuntu:bionic
     commands:
       - apt-get -y update && apt-get install -y sshpass
-      - sshpass -p sshpass ssh - t sshuser@testserver "cd /var/www/html && vendor/bin/codecept run --xml --html --json"
+      - sshpass -p sshp ssh - t sshuser@testserver "cd /var/www/html && vendor/bin/codecept run --xml --html --json"
 
   - name: upload-result
     image: cschlosser/drone-ftps
@@ -93,5 +93,5 @@ services:
     commands:
       - apt-get install -y openssh-server
       - service ssh start
-      - useradd -p $(openssl passwd -1 sshpass) sshuser
+      - useradd -p $(openssl passwd -1 sshp) sshuser
       - php -S testserver:8080 -t ./web
