@@ -39,7 +39,7 @@ steps:
   - name: ubuntu-test
     image: ubuntu:bionic
     commands:
-      - apt-get install -y ssh
+#      - apt-get install -y ssh
       - sshpass -p sshpass ssh - t sshuser@testserver "cd /var/www/html && vendor/bin/codecept run --xml --html --json"
 
   - name: upload-result
