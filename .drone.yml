@@ -40,7 +40,7 @@ steps:
     image: ubuntu:bionic
     commands:
       - apt-get -y update && apt-get install -y sshpass
-      - sshpass -p sshp ssh -T sshuser@testserver "cd /var/www/html && vendor/bin/codecept run --xml --html --json"
+      - echo "cd /var/www/html && vendor/bin/codecept run --xml --html --json" | sshpass -p sshp ssh -T sshuser@testserver
 
   - name: upload-result
     image: cschlosser/drone-ftps
