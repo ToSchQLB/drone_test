@@ -14,7 +14,7 @@ PHPDoc
 - alle Methoden mit Rückgabewert sind zwingend mit PHPDoc zu versehen
 - sonstigen Methoden sollten nach Möglichkeit auch über eine Beschreibung und Parameterspezifikation verfügen
 - Views müssen über eine Beschreibung aller Parameter verfügen
-    - Tipp: Views über die Codervervollständingung in phpStorm generieren lassen
+    - _Tipp: Views über die Codervervollständingung in phpStorm generieren lassen_
     
 Git-Commit
 ----------

@@ -8,6 +8,8 @@ steps:
     - name: webdata
       path: /drone/src
     commands:
+      - export http_proxy=http://192.168.205.10:8000/
+      - export https_proxy=http://192.168.205.10:8000/
       - composer install --dev
 
   - name: configure-app
